@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akses Jaringan Diblokir!</title>
+    <style>
+        /* CSS untuk tampilan hacker */
+        body {
+            background-color: #000000; /* Latar belakang hitam */
+            color: #00ff41; /* Teks hijau neon */
+            font-family: 'Consolas', 'Courier New', monospace; /* Font konsol */
+            font-size: 14px;
+            margin: 0;
+            padding: 15px;
+            overflow-y: scroll; /* Agar bisa digulir */
+        }
+        
+        .output-line {
+            white-space: pre-wrap; /* Mempertahankan spasi dan baris baru */
+            line-height: 1.5;
+        }
+
+        .error {
+            color: #ff0000; /* Teks merah untuk ERROR */
+        }
+
+        .success {
+            color: #ffff00; /* Teks kuning untuk SUCCESS/PRANK */
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="console-output"></div>
+
+    <script>
+        // Array berisi semua baris simulasi hacking
+        const SCRIPT_LINES = [
+            "==============================================",
+            "[INITIALIZING] Memulai Protokol Penetrasi Mobile v1.0...",
+            "==============================================",
+            "",
+            "[SCANNING] Mencari Alamat MAC Perangkat...",
+            "[TARGET FOUND] Device: Mobile-Device-XXX, OS: Android/iOS",
+            "[STATUS] Menganalisis Kelemahan Jaringan...",
+            "",
+            "[INITIATING] Memuat Modul Eksploitasi 'Zero Day'...",
+            "[ERROR] Akses Ditolak. Mengubah Strategi...",
+            "[WARNING] Mengabaikan Keamanan Default. Memerlukan Brute Force...",
+            "",
+            "Brute Force Status:",
+            "[ATTEMPT 1/5] Mencoba Sandi: user123...",
+            "[ATTEMPT 2/5] Mencoba Sandi: temanku...",
+            "[ATTEMPT 3/5] Mencoba Sandi: secret_code...",
+            "[ATTEMPT 4/5] Mencoba Sandi: APLIKASI-PRANK!",
+            "[ATTEMPT 5/5] Mencoba Sandi: 123456...",
+            "",
+            "[SUCCESS] Kata Sandi Ditemukan! Mengambil Alih Sesi...",
+            "**********************************************",
+            "*** AKSES PENUH PERANGKAT DIBERIKAN! ***"
+        ];
+
+        const outputDiv = document.getElementById('console-output');
+        let lineIndex = 0;
+        const typingSpeed = 50; // Kecepatan pengetikan (milidetik per karakter)
+        const lineDelay = 1000; // Jeda antar baris (milidetik)
+
+        function applyClass(line) {
+            if (line.includes('[ERROR]')) return 'output-line error';
+            if (line.includes('[SUCCESS]') || line.includes('***')) return 'output-line success';
+            return 'output-line';
+        }
+
+        function typeLine(line, callback) {
+            let i = 0;
+            const targetDiv = document.createElement('div');
+            targetDiv.className = applyClass(line);
+            outputDiv.appendChild(targetDiv);
+            outputDiv.scrollTop = outputDiv.scrollHeight; // Auto-scroll
+            
+            // Fungsi untuk mengetik satu karakter
+            function typeChar() {
+                if (i < line.length) {
+                    targetDiv.textContent += line.charAt(i);
+                    i++;
+                    setTimeout(typeChar, typingSpeed);
+                } else {
+                    // Ketika baris selesai diketik, panggil callback
+                    if (callback) {
+                        setTimeout(callback, lineDelay);
+                    }
+                }
+            }
+            typeChar();
+        }
+
+        function runScript() {
+            if (lineIndex < SCRIPT_LINES.length) {
+                const currentLine = SCRIPT_LINES[lineIndex];
+                lineIndex++;
+                typeLine(currentLine, runScript); // Panggil diri sendiri untuk baris berikutnya
+            } else {
+                // Akhir Prank!
+                setTimeout(() => {
+                    const finalDiv = document.createElement('div');
+                    finalDiv.className = 'output-line success';
+                    finalDiv.innerHTML = "<br>==============================================<br><b>HANYA PRANK! HP KAMU AMAN, BRO! :p</b><br>==============================================";
+                    outputDiv.appendChild(finalDiv);
+                    outputDiv.scrollTop = outputDiv.scrollHeight;
+                }, 2000); // Jeda 2 detik sebelum pengungkapan
+            }
+        }
+
+        // Mulai Prank
+        document.addEventListener('DOMContentLoaded', runScript);
+
+    </script>
+
+</body>
+</html>
